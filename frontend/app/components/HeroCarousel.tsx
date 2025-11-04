@@ -83,8 +83,8 @@ export default function HeroCarousel() {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`h-2 w-2 rounded-full transition-all ${
-                index === currentSlide ? 'w-8 bg-white' : 'bg-white/50 hover:bg-white/80'
+              className={`h-2 cursor-pointer rounded-full transition-all duration-300 ${
+                index === currentSlide ? 'w-8 bg-yellow-400' : 'w-2 bg-white hover:bg-gray-500'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

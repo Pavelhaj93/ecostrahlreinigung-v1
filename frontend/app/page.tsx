@@ -1,6 +1,7 @@
 import HeroCarousel from '@/app/components/HeroCarousel'
 import ServicesSection from '@/app/components/ServicesSection'
 import PricingSection from '@/app/components/PricingSection'
+import GalleryCarousel from '@/app/components/GalleryCarousel'
 import ContactSection from '@/app/components/ContactSection'
 import FooterSection from '@/app/components/FooterSection'
 
@@ -10,6 +11,7 @@ export default function Page() {
       <HeroCarousel />
       <ServicesSection />
       <PricingSection />
+      <GalleryCarousel />
       <ContactSection />
       <FooterSection />
     </div>
