@@ -10,6 +10,7 @@
 @theme {
   --shadow-layer: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
 
+  --color-primary: #ffe52c;
   --color-framework: #000;
   --color-black: #0b0b0b;
   --color-white: #fff;
@@ -28,8 +29,20 @@
   --color-gray-900: #1b1d27;
   --color-gray-950: #13141b;
 
-  --font-display: 'Inter', 'sans-serif';
-  --font-sans: 'Inter', 'sans-serif';
+  --font-display: var(--font-industry), 'sans-serif';
+  --font-sans: var(--font-industry), 'sans-serif';
 
   --default-transition-duration: 250ms;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Apply Industry font globally and dark theme */
+body {
+  font-family: var(--font-industry), sans-serif;
+  background-color: #0b0b0b;
+  color: #ffffff;
 }
