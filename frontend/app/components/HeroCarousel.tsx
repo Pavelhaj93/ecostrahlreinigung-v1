@@ -78,10 +78,10 @@ export default function HeroCarousel({block}: HeroCarouselProps = {}) {
         <div className="relative z-10 flex h-full items-center">
           <div className="container mx-auto px-6">
             <div className="max-w-3xl">
-              <h2 className="mb-4 text-2xl font-semibold text-primary transition-opacity duration-500">
+              <h2 className="mb-4 text-xl font-semibold text-primary transition-opacity duration-500">
                 {slide.subtitle}
               </h2>
-              <h1 className="mb-6 text-5xl font-bold text-white transition-opacity duration-500 md:text-6xl lg:text-7xl">
+              <h1 className="mb-6 text-3xl font-bold text-white transition-opacity duration-500 sm:text-5xl md:text-6xl lg:text-6xl">
                 {slide.title}
               </h1>
               <p className="mb-8 text-xl text-gray-300 transition-opacity duration-500 md:text-2xl">
