@@ -43,7 +43,7 @@ export default function PricingSection({block}: PricingSectionProps = {}) {
     <section id="preise" className="py-20 bg-gray-950">
       <div className="container mx-auto px-6">
         <h2 className="text-4xl font-bold text-center mb-16 text-white">{heading}</h2>
-        <div className="grid md:grid-cols-3 gap-8 mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto">
           {pricingCards.map((card, index) => (
             <div
               key={card._key || index}
