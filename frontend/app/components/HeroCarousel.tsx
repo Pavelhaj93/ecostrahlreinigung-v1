@@ -2,32 +2,50 @@
 
 import * as React from 'react'
 import {Button} from '@/components/ui/button'
+import {urlForImage} from '@/sanity/lib/utils'
 
-const slides = [
+interface Slide {
+  _key?: string
+  image?: any
+  title: string
+  subtitle: string
+  description: string
+  buttonText?: string
+  buttonLink?: string
+}
+
+interface HeroCarouselProps {
+  block?: {
+    slides?: Slide[]
+  }
+}
+
+const defaultSlides: Slide[] = [
   {
-    id: 1,
-    image: '/images/hero-1.png',
     title: 'Professionelle Trockeneisreinigung',
     subtitle: 'Umweltfreundlich · Effizient · Präzise',
     description: 'Mobile Reinigungslösungen für Industrie und Gewerbe in ganz Bayern',
+    buttonText: 'Unsere Leistungen',
+    buttonLink: '#leistungen',
   },
   {
-    id: 2,
-    image: '/images/hero-2.png',
     title: 'Innovative Laserreinigung',
     subtitle: 'Kontaktfrei · Schonend · Automatisierbar',
     description: 'Höchste Präzision für empfindliche Bauteile und Oberflächen',
+    buttonText: 'Unsere Leistungen',
+    buttonLink: '#leistungen',
   },
   {
-    id: 3,
-    image: '/images/hero-3.png',
     title: 'Leistungsstarkes Sandstrahlen',
     subtitle: 'Gründlich · Flexibel · Materialschonend',
     description: 'Optimale Oberflächenvorbereitung für perfekte Beschichtungen',
+    buttonText: 'Unsere Leistungen',
+    buttonLink: '#leistungen',
   },
 ]
 
-export default function HeroCarousel() {
+export default function HeroCarousel({block}: HeroCarouselProps = {}) {
+  const slides = block?.slides && block.slides.length > 0 ? block.slides : defaultSlides
   const [currentSlide, setCurrentSlide] = React.useState(0)
 
   React.useEffect(() => {
@@ -47,7 +65,9 @@ export default function HeroCarousel() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
           style={{
-            backgroundImage: `url(${slide.image})`,
+            backgroundImage: slide.image
+              ? `url(${urlForImage(slide.image)?.width(1920).height(600).url()})`
+              : 'linear-gradient(to right, #1a1a1a, #2d2d2d)',
             backgroundBlendMode: 'overlay',
           }}
         >
@@ -67,13 +87,15 @@ export default function HeroCarousel() {
               <p className="mb-8 text-xl text-gray-300 transition-opacity duration-500 md:text-2xl">
                 {slide.description}
               </p>
-              <Button
-                asChild
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-black font-semibold"
-              >
-                <a href="#leistungen">Unsere Leistungen</a>
-              </Button>
+              {slide.buttonText && (
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-black font-semibold"
+                >
+                  <a href={slide.buttonLink || '#leistungen'}>{slide.buttonText}</a>
+                </Button>
+              )}
             </div>
           </div>
         </div>{' '}

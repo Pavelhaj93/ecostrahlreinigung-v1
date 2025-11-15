@@ -4,6 +4,8 @@ import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
 import Header from '@/app/components/Header'
 import {industry} from './fonts'
+import Footer from './components/Footer'
+import FooterSection from './components/FooterSection'
 
 export const metadata: Metadata = {
   title: 'Ecostrahlreinigung - Mobile Reinigungsservices in Bayern',
@@ -25,6 +27,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <body className={industry.className}>
         <Header />
         <main>{children}</main>
+        <FooterSection />
         <SpeedInsights />
       </body>
     </html>

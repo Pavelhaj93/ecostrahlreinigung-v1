@@ -11,50 +11,60 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
+import {urlForImage} from '@/sanity/lib/utils'
 
 interface GalleryItem {
-  id: string
+  _key?: string
   title: string
-  image: string
+  image?: any
   description?: string
 }
 
-// TODO: Replace placeholder images with real project photos
-// Place your images in /public/images/placeholders/ as gallery-1.jpg, gallery-2.jpg, etc.
-const galleryItems: GalleryItem[] = [
+interface GalleryCarouselProps {
+  block?: {
+    heading?: string
+    subheading?: string
+    galleryItems?: GalleryItem[]
+  }
+}
+
+// Default gallery items
+const defaultGalleryItems: GalleryItem[] = [
   {
-    id: '1',
     title: 'Laserreinigung von Metalloberflächen',
-    image: '/images/placeholders/gallery-1.jpg',
     description: 'Präzise und schonende Reinigung',
   },
   {
-    id: '2',
     title: 'Trockeneisreinigung im Industriebereich',
-    image: '/images/placeholders/gallery-2.jpg',
     description: 'Effektiv und umweltfreundlich',
   },
   {
-    id: '3',
     title: 'Sandstrahlen von Fassaden',
-    image: '/images/placeholders/gallery-3.jpg',
     description: 'Gründliche Oberflächenbehandlung',
   },
   {
-    id: '4',
     title: 'Restaurierung historischer Gebäude',
-    image: '/images/placeholders/gallery-4.jpg',
     description: 'Bewahrung kulturellen Erbes',
   },
   {
-    id: '5',
     title: 'Industrielle Maschinenreinigung',
-    image: '/images/placeholders/gallery-5.jpg',
     description: 'Professionelle Wartung',
   },
 ]
 
-export default function GalleryCarousel() {
+export default function GalleryCarousel({block}: GalleryCarouselProps = {}) {
+  const heading = block?.heading || 'Unsere Projekte'
+  const subheading =
+    block?.subheading ||
+    'Entdecken Sie unsere erfolgreich abgeschlossenen Projekte und lassen Sie sich von der Qualität unserer Arbeit überzeugen'
+  const galleryItems =
+    block?.galleryItems && block.galleryItems.length > 0 ? block.galleryItems : defaultGalleryItems
+
+  // Debug logging
+  if (block?.galleryItems) {
+    console.log('Gallery items from Sanity:', block.galleryItems)
+  }
+
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
   const [count, setCount] = useState(0)
@@ -75,11 +85,8 @@ export default function GalleryCarousel() {
   return (
     <section className="py-20 bg-gray-900">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-4 text-white">Unsere Projekte</h2>
-        <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-          Entdecken Sie unsere erfolgreich abgeschlossenen Projekte und lassen Sie sich von der
-          Qualität unserer Arbeit überzeugen
-        </p>
+        <h2 className="text-4xl font-bold text-center mb-4 text-white">{heading}</h2>
+        <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">{subheading}</p>
 
         <div className="relative max-w-6xl mx-auto">
           <Carousel
@@ -103,17 +110,26 @@ export default function GalleryCarousel() {
             </div>
 
             <CarouselContent className="-ml-2 md:-ml-4">
-              {galleryItems.map((item) => (
-                <CarouselItem key={item.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+              {galleryItems.map((item, index) => (
+                <CarouselItem
+                  key={item._key || index}
+                  className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
+                >
                   <div className="group cursor-pointer">
                     <div className="relative overflow-hidden rounded-lg bg-gray-950 border border-gray-800 hover:border-yellow-500 transition-all duration-300">
                       <div className="relative h-64 w-full overflow-hidden">
-                        <Image
-                          src="https://placehold.co/600x400/png?text=Wir bereiten uns vor"
-                          alt={item.title}
-                          fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-110"
-                        />
+                        {item.image ? (
+                          <Image
+                            src={urlForImage(item.image)?.width(800).height(600).url() || ''}
+                            alt={item.title}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-110"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gray-800 flex items-center justify-center">
+                            <span className="text-gray-500">No image</span>
+                          </div>
+                        )}
                         <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 p-6">
