@@ -31,11 +31,6 @@ export default function ServicesSection({block}: ServicesSectionProps = {}) {
   const heading = block?.heading || 'Unsere Leistungen'
   const cleaningExamples = block?.cleaningExamples || defaultCleaningExamples
 
-  // Debug logging
-  if (block?.services) {
-    console.log('Services from Sanity:', block.services)
-  }
-
   return (
     <section id="leistungen" className="py-20 bg-black">
       <div className="container mx-auto px-6">
