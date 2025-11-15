@@ -49,6 +49,166 @@ export const getPageQuery = defineQuery(`
           }
         }
       },
+      _type == "heroCarousel" => {
+        slides[]{
+          _key,
+          title,
+          subtitle,
+          description,
+          buttonText,
+          buttonLink,
+          image{
+            ...,
+            asset
+          }
+        }
+      },
+      _type == "servicesSection" => {
+        heading,
+        services[]{
+          _key,
+          title,
+          iconColor,
+          advantages,
+          description[]{
+            ...,
+            markDefs[]{
+              ...,
+              ${linkReference}
+            }
+          }
+        },
+        cleaningExamples{
+          heading,
+          examples
+        }
+      },
+      _type == "pricingSection" => {
+        heading,
+        pricingCards[]{
+          _key,
+          serviceName,
+          price,
+          priceUnit,
+          priceColor
+        }
+      },
+      _type == "galleryCarousel" => {
+        heading,
+        subheading,
+        galleryItems[]{
+          _key,
+          title,
+          description,
+          image{
+            ...,
+            asset
+          }
+        }
+      },
+      _type == "contactSection" => {
+        heading,
+        subheading,
+        description,
+        contactInfo{
+          address,
+          email,
+          phone
+        },
+        showForm
+      },
+    },
+  }
+`)
+
+export const getHomepageQuery = defineQuery(`
+  *[_type == 'page' && slug.current == '/'][0]{
+    _id,
+    _type,
+    name,
+    slug,
+    "pageBuilder": pageBuilder[]{
+      ...,
+      _type == "callToAction" => {
+        ${linkFields},
+      },
+      _type == "infoSection" => {
+        content[]{
+          ...,
+          markDefs[]{
+            ...,
+            ${linkReference}
+          }
+        }
+      },
+      _type == "heroCarousel" => {
+        slides[]{
+          _key,
+          title,
+          subtitle,
+          description,
+          buttonText,
+          buttonLink,
+          image{
+            ...,
+            asset
+          }
+        }
+      },
+      _type == "servicesSection" => {
+        heading,
+        services[]{
+          _key,
+          title,
+          iconColor,
+          advantages,
+          description[]{
+            ...,
+            markDefs[]{
+              ...,
+              ${linkReference}
+            }
+          }
+        },
+        cleaningExamples{
+          heading,
+          examples
+        }
+      },
+      _type == "pricingSection" => {
+        heading,
+        pricingCards[]{
+          _key,
+          serviceName,
+          price,
+          priceUnit,
+          priceColor
+        }
+      },
+      _type == "galleryCarousel" => {
+        heading,
+        subheading,
+        galleryItems[]{
+          _key,
+          title,
+          description,
+          image{
+            ...,
+            asset
+          }
+        }
+      },
+      _type == "contactSection" => {
+        heading,
+        subheading,
+        description,
+        contactInfo{
+          address,
+          email,
+          phone
+        },
+        showForm
+      },
     },
   }
 `)

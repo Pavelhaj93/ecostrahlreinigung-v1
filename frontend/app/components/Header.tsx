@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import {useState} from 'react'
+import {Spin as Hamburger} from 'hamburger-react'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -10,14 +11,22 @@ export default function Header() {
     <header className="bg-black border-b border-gray-800 sticky top-0 z-50">
       <nav className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          {/* SVG Logo */}
-          <Image
-            src="/images/logo.svg"
-            alt="Ecostrahlreinigung Logo"
-            width={200}
-            height={50}
-            className="-my-5"
-          />
+          {/* Logo with text */}
+          <div className="flex items-center gap-3">
+            <Image
+              src="/images/logo-triangle-yellow.png"
+              alt="Ecostrahlreinigung Logo"
+              width={200}
+              height={50}
+              className="-my-5 sm:h-20 h-16 w-auto"
+            />
+            {/* Brand text - hidden on mobile */}
+            <div className="flex flex-row sm:flex-col  leading-tight uppercase italic font-bold text-lg">
+              <span className="text-yellow-300">ECO</span>
+              <span className="text-white">STRAHL</span>
+              <span className="text-white">REINIGUNG</span>
+            </div>
+          </div>
           <ul className="hidden md:flex space-x-8 uppercase font-medium">
             <li>
               <a href="#home" className="text-white hover:text-primary transition-colors">
@@ -41,26 +50,19 @@ export default function Header() {
             </li>
           </ul>
           <div className="md:hidden">
-            <button
-              className="text-white"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle mobile menu"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
+            <Hamburger
+              toggled={mobileMenuOpen}
+              toggle={setMobileMenuOpen}
+              color="oklch(87.9% 0.169 91.605)"
+              size={24}
+              duration={0.5}
+            />
           </div>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 bg-gray-900 rounded-lg p-4">
+          <div className="md:hidden mt-4 pb-4 bg-gray-900 rounded-lg p-4 overflow-hidden animate-slideDown">
             <ul className="space-y-2">
               <li>
                 <a
