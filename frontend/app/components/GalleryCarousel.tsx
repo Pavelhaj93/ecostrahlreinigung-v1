@@ -60,11 +60,6 @@ export default function GalleryCarousel({block}: GalleryCarouselProps = {}) {
   const galleryItems =
     block?.galleryItems && block.galleryItems.length > 0 ? block.galleryItems : defaultGalleryItems
 
-  // Debug logging
-  if (block?.galleryItems) {
-    console.log('Gallery items from Sanity:', block.galleryItems)
-  }
-
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
   const [count, setCount] = useState(0)

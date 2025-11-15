@@ -54,7 +54,7 @@ export default function HeroCarousel({block}: HeroCarouselProps = {}) {
     }, 5000) // Change every 5 seconds
 
     return () => clearInterval(timer)
-  }, [])
+  }, [slides.length])
 
   const slide = slides[currentSlide]
 

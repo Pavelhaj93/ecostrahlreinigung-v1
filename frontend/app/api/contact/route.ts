@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     // 2. Save to database
     // 3. Send to your email address
 
-    console.log('Contact form submission:', {name, email, message, privacyAccepted})
+    // console.log('Contact form submission:', {name, email, message, privacyAccepted})
 
     // For now, just return success
     // In a real implementation, you would send the email here

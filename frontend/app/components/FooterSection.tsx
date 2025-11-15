@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function FooterSection() {
   return (
     <footer className="bg-black border-t border-gray-800 text-gray-400 py-8">
@@ -6,9 +8,9 @@ export default function FooterSection() {
           <p>&copy; {new Date().getFullYear()} Ecostrahlreinigung. Alle Rechte vorbehalten.</p>
 
           <div className="flex items-center space-x-6">
-            <a href="/datenschutz" className="hover:text-primary transition-colors">
+            <Link href="/datenschutz" className="hover:text-primary transition-colors">
               Datenschutzerklärung
-            </a>
+            </Link>
             <span className="text-gray-600">|</span>
             <span>
               Made by{' '}
