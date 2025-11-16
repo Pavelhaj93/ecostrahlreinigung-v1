@@ -72,7 +72,10 @@ export const getPageQuery = defineQuery(`
             ...,
             asset
           },
-          link,
+          showMoreButton {
+          ...,
+          ${linkFields}
+          },
           advantages,
           description[]{
             ...,
@@ -168,7 +171,10 @@ export const getHomepageQuery = defineQuery(`
             ...,
             asset
           },
-          link,
+          showMoreButton {
+          ...,
+          ${linkFields}
+          },
           advantages,
           description[]{
             ...,

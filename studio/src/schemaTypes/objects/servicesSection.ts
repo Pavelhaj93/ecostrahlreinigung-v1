@@ -49,10 +49,21 @@ export const servicesSection = defineType({
               description: 'Short text highlighting key advantages',
             }),
             defineField({
-              name: 'link',
-              title: 'Link',
-              type: 'link',
-              description: 'Link to service detail page',
+              name: 'showMoreButton',
+              title: 'Show more button',
+              type: 'object',
+              fields: [
+                defineField({
+                  name: 'text',
+                  title: 'Button Text',
+                  type: 'string',
+                }),
+                defineField({
+                  name: 'link',
+                  title: 'Button Link',
+                  type: 'link',
+                }),
+              ],
             }),
           ],
           preview: {

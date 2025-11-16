@@ -3,6 +3,7 @@ import Image from 'next/image'
 import {urlForImage} from '@/sanity/lib/utils'
 import ResolvedLink from './ResolvedLink'
 import {ChevronRight} from 'lucide-react'
+import {Button} from '@/components/ui/button'
 
 interface Service {
   _key?: string
@@ -10,10 +11,12 @@ interface Service {
   image?: any
   description?: any[]
   advantages?: string
-  link?: {
-    _type: string
-    href?: string
-    label?: string
+  showMoreButton?: {
+    link: {
+      _type: string
+      href?: string
+    }
+    text?: string
   }
 }
 
@@ -40,7 +43,7 @@ export default function ServicesSection({block}: ServicesSectionProps = {}) {
   const heading = block?.heading || 'Unsere Leistungen'
   const cleaningExamples = block?.cleaningExamples || defaultCleaningExamples
 
-  console.log('ttt servicesimage', block?.services?.[0])
+  console.log('ttt service', block?.services?.[0])
 
   return (
     <section id="leistungen" className="py-20 bg-black">
@@ -84,12 +87,12 @@ export default function ServicesSection({block}: ServicesSectionProps = {}) {
                         {service.advantages}
                       </p>
                     )}
-                    {service.link && (
-                      <ResolvedLink link={service.link}>
-                        <span className="inline-flex items-center gap-2 bg-primary text-black px-6 py-3 rounded-md font-semibold hover:bg-yellow-400 transition-colors cursor-pointer">
-                          Mehr erfahren
+                    {service.showMoreButton && (
+                      <ResolvedLink link={service.showMoreButton.link}>
+                        <Button>
+                          {service.showMoreButton.text}
                           <ChevronRight size={16} />
-                        </span>
+                        </Button>
                       </ResolvedLink>
                     )}
                   </div>

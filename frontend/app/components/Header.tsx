@@ -43,11 +43,12 @@ export default function Header() {
           <NavigationMenu className="hidden md:block">
             <NavigationMenuList className="space-x-2">
               <NavigationMenuItem>
-                <Link href="/">
-                  <NavigationMenuLink className="text-white hover:text-primary transition-colors px-4 py-2 uppercase font-medium">
-                    Home
-                  </NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink
+                  className="text-white hover:text-primary transition-colors px-4 py-2 uppercase font-medium"
+                  asChild
+                >
+                  <Link href="/">Home</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
@@ -57,36 +58,40 @@ export default function Header() {
                 <NavigationMenuContent>
                   <ul className="w-[200px] p-2 bg-gray-900 border border-gray-800">
                     <li>
-                      <Link href="/laserreinigung">
-                        <NavigationMenuLink className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md">
-                          Laserreinigung
-                        </NavigationMenuLink>
-                      </Link>
+                      <NavigationMenuLink
+                        className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md"
+                        asChild
+                      >
+                        <Link href="/laserreinigung">Laserreinigung</Link>
+                      </NavigationMenuLink>
                     </li>
                     <li>
-                      <Link href="/sandstrahlen">
-                        <NavigationMenuLink className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md">
-                          Sandstrahlen
-                        </NavigationMenuLink>
-                      </Link>
+                      <NavigationMenuLink
+                        className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md"
+                        asChild
+                      >
+                        <Link href="/sandstrahlen">Sandstrahlen</Link>
+                      </NavigationMenuLink>
                     </li>
                     <li>
-                      <Link href="/trockenreinigung">
-                        <NavigationMenuLink className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md">
-                          Trockenreinigung
-                        </NavigationMenuLink>
-                      </Link>
+                      <NavigationMenuLink
+                        className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md"
+                        asChild
+                      >
+                        <Link href="/trockenreinigung">Trockenreinigung</Link>
+                      </NavigationMenuLink>
                     </li>
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link href="/kontakt">
-                  <NavigationMenuLink className="text-white hover:text-primary transition-colors px-4 py-2 uppercase font-medium">
-                    Kontakt
-                  </NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink
+                  className="text-white hover:text-primary transition-colors px-4 py-2 uppercase font-medium"
+                  asChild
+                >
+                  <Link href="/kontakt">Kontakt</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
