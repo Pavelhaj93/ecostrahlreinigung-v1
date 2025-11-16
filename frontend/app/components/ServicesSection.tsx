@@ -1,11 +1,20 @@
 import {PortableText} from '@portabletext/react'
+import Image from 'next/image'
+import {urlForImage} from '@/sanity/lib/utils'
+import ResolvedLink from './ResolvedLink'
+import {ChevronRight} from 'lucide-react'
 
 interface Service {
   _key?: string
   title: string
+  image?: any
   description?: any[]
   advantages?: string
-  iconColor?: string
+  link?: {
+    _type: string
+    href?: string
+    label?: string
+  }
 }
 
 interface CleaningExamples {
@@ -31,29 +40,63 @@ export default function ServicesSection({block}: ServicesSectionProps = {}) {
   const heading = block?.heading || 'Unsere Leistungen'
   const cleaningExamples = block?.cleaningExamples || defaultCleaningExamples
 
+  console.log('ttt servicesimage', block?.services?.[0])
+
   return (
     <section id="leistungen" className="py-20 bg-black">
       <div className="container mx-auto px-6">
         <h2 className="text-4xl font-bold text-center mb-16 text-white">{heading}</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {block?.services?.map((service, index) => (
-            <div
-              key={service._key || index}
-              className="bg-gray-900 p-8 rounded-lg border border-gray-800 hover:border-primary transition-colors"
-            >
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
-              </div>
-              {service.description && (
-                <div className="text-gray-300 mb-4 prose prose-invert max-w-none">
-                  <PortableText value={service.description} />
+
+        {/* Services with alternating layout */}
+        <div className="space-y-16 mb-16">
+          {block?.services?.map((service, index) => {
+            const isEven = index % 2 === 0
+            return (
+              <div
+                key={service._key || index}
+                className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 items-center`}
+              >
+                {/* Image */}
+                {service.image && (
+                  <div className="w-full lg:w-1/2">
+                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-gray-800">
+                      <Image
+                        src={urlForImage(service.image)?.width(800).height(600).url() || ''}
+                        alt={service.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Text Content */}
+                <div className="w-full lg:w-1/2">
+                  <div className="p-8 rounded-lg h-full">
+                    <h3 className="text-3xl font-bold text-white mb-4">{service.title}</h3>
+                    {service.description && (
+                      <div className="text-gray-300 mb-4 prose prose-invert max-w-none">
+                        <PortableText value={service.description} />
+                      </div>
+                    )}
+                    {service.advantages && (
+                      <p className="text-sm text-primary font-semibold mb-6">
+                        {service.advantages}
+                      </p>
+                    )}
+                    {service.link && (
+                      <ResolvedLink link={service.link}>
+                        <span className="inline-flex items-center gap-2 bg-primary text-black px-6 py-3 rounded-md font-semibold hover:bg-yellow-400 transition-colors cursor-pointer">
+                          Mehr erfahren
+                          <ChevronRight size={16} />
+                        </span>
+                      </ResolvedLink>
+                    )}
+                  </div>
                 </div>
-              )}
-              {service.advantages && (
-                <p className="text-sm text-primary font-semibold">{service.advantages}</p>
-              )}
-            </div>
-          ))}
+              </div>
+            )
+          })}
         </div>
 
         {/* What We Clean */}

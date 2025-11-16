@@ -27,6 +27,15 @@ export const servicesSection = defineType({
               validation: (Rule) => Rule.required(),
             }),
             defineField({
+              name: 'image',
+              title: 'Service Image',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
               name: 'description',
               title: 'Description',
               type: 'array',
@@ -40,22 +49,16 @@ export const servicesSection = defineType({
               description: 'Short text highlighting key advantages',
             }),
             defineField({
-              name: 'iconColor',
-              title: 'Icon Color',
-              type: 'string',
-              options: {
-                list: [
-                  {title: 'Yellow 300', value: 'bg-yellow-300'},
-                  {title: 'Yellow 400', value: 'bg-yellow-400'},
-                  {title: 'Yellow 500', value: 'bg-yellow-500'},
-                ],
-              },
-              initialValue: 'bg-yellow-400',
+              name: 'link',
+              title: 'Link',
+              type: 'link',
+              description: 'Link to service detail page',
             }),
           ],
           preview: {
             select: {
               title: 'title',
+              media: 'image',
             },
           },
         },
@@ -63,19 +66,16 @@ export const servicesSection = defineType({
       initialValue: [
         {
           title: 'Laserreinigung',
-          iconColor: 'bg-yellow-300',
           advantages:
             'Vorteile: kein Abrieb, keine Rückstände, automatisierbar, geringer Wartungsaufwand.',
         },
         {
           title: 'Trockeneisreinigung',
-          iconColor: 'bg-yellow-400',
           advantages:
             'Vorteile: chemiefrei, kein Wasser, keine Rückstände, hohe Reinigungsleistung.',
         },
         {
           title: 'Sandstrahlen',
-          iconColor: 'bg-yellow-500',
           advantages:
             'Vorteile: hohe Reinigungsleistung, vielseitig, materialschonend, optimal für Beschichtungen.',
         },

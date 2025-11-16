@@ -68,7 +68,11 @@ export const getPageQuery = defineQuery(`
         services[]{
           _key,
           title,
-          iconColor,
+          image{
+            ...,
+            asset
+          },
+          link,
           advantages,
           description[]{
             ...,
@@ -160,7 +164,11 @@ export const getHomepageQuery = defineQuery(`
         services[]{
           _key,
           title,
-          iconColor,
+          image{
+            ...,
+            asset
+          },
+          link,
           advantages,
           description[]{
             ...,
