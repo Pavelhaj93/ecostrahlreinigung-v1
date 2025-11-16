@@ -43,7 +43,7 @@ export default function Header() {
           <NavigationMenu className="hidden md:block">
             <NavigationMenuList className="space-x-2">
               <NavigationMenuItem>
-                <Link href="/" legacyBehavior passHref>
+                <Link href="/">
                   <NavigationMenuLink className="text-white hover:text-primary transition-colors px-4 py-2 uppercase font-medium">
                     Home
                   </NavigationMenuLink>
@@ -57,21 +57,21 @@ export default function Header() {
                 <NavigationMenuContent>
                   <ul className="w-[200px] p-2 bg-gray-900 border border-gray-800">
                     <li>
-                      <Link href="/laserreinigung" legacyBehavior passHref>
+                      <Link href="/laserreinigung">
                         <NavigationMenuLink className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md">
                           Laserreinigung
                         </NavigationMenuLink>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/sandstrahlen" legacyBehavior passHref>
+                      <Link href="/sandstrahlen">
                         <NavigationMenuLink className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md">
                           Sandstrahlen
                         </NavigationMenuLink>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/trockenreinigung" legacyBehavior passHref>
+                      <Link href="/trockenreinigung">
                         <NavigationMenuLink className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md">
                           Trockenreinigung
                         </NavigationMenuLink>
@@ -82,7 +82,7 @@ export default function Header() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link href="/kontakt" legacyBehavior passHref>
+                <Link href="/kontakt">
                   <NavigationMenuLink className="text-white hover:text-primary transition-colors px-4 py-2 uppercase font-medium">
                     Kontakt
                   </NavigationMenuLink>
