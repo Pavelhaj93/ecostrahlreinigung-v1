@@ -146,11 +146,11 @@ export default function Header() {
               </li>
               <li>
                 <Link
-                  href="/trockenreinigung"
+                  href="/trockeneisreinigung"
                   className="block text-white hover:text-primary transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Trockenreinigung
+                  Trockeneisreinigung
                 </Link>
               </li>
               <li>
