@@ -12,11 +12,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
-import {ChevronDown} from 'lucide-react'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [servicesOpen, setServicesOpen] = useState(false)
 
   return (
     <header className="bg-black border-b border-gray-800 sticky top-0 z-50">
@@ -47,13 +45,13 @@ export default function Header() {
                   className="text-white hover:text-primary transition-colors px-4 py-2 uppercase font-medium"
                   asChild
                 >
-                  <Link href="/">Home</Link>
+                  <Link href="/">Heim</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-white hover:text-primary bg-transparent uppercase font-medium">
-                  Services
+                  Leistungen
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="w-[200px] p-2 bg-gray-900 border border-gray-800">
@@ -125,7 +123,7 @@ export default function Header() {
                   className="block text-white hover:text-primary transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Home
+                  Heim
                 </Link>
               </li>
               <li>
