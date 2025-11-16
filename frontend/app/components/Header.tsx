@@ -29,13 +29,13 @@ export default function Header() {
               alt="Ecostrahlreinigung Logo"
               width={80}
               height={80}
-              className="-my-5 w-15 sm:w-20 h-auto object-contain"
+              className="-my-2 w-15 sm:w-16 h-auto object-contain"
             />
             {/* Brand text - hidden on mobile */}
-            <div className="flex flex-row sm:flex-col  leading-tight uppercase italic font-bold text-lg">
-              <span className="text-yellow-300">ECO</span>
-              <span className="text-white">STRAHL</span>
-              <span className="text-white">REINIGUNG</span>
+            <div className="flex flex-row sm:flex-col leading-tight uppercase italic font-bold text-lg">
+              <span className="text-yellow-300">
+                ECO<span className="text-white">STRAHLREINIGUNG</span>
+              </span>
             </div>
           </div>
 
