@@ -3,9 +3,20 @@
 import Image from 'next/image'
 import {useState} from 'react'
 import {Spin as Hamburger} from 'hamburger-react'
+import Link from 'next/link'
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu'
+import {ChevronDown} from 'lucide-react'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
 
   return (
     <header className="bg-black border-b border-gray-800 sticky top-0 z-50">
@@ -16,9 +27,9 @@ export default function Header() {
             <Image
               src="/images/logo-triangle-yellow.png"
               alt="Ecostrahlreinigung Logo"
-              width={200}
-              height={50}
-              className="-my-5 sm:h-20 h-16 w-auto"
+              width={80}
+              height={80}
+              className="-my-5 w-15 sm:w-20 h-auto object-contain"
             />
             {/* Brand text - hidden on mobile */}
             <div className="flex flex-row sm:flex-col  leading-tight uppercase italic font-bold text-lg">
@@ -27,28 +38,58 @@ export default function Header() {
               <span className="text-white">REINIGUNG</span>
             </div>
           </div>
-          <ul className="hidden md:flex space-x-8 uppercase font-medium">
-            <li>
-              <a href="#home" className="text-white hover:text-primary transition-colors">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#leistungen" className="text-white hover:text-primary transition-colors">
-                Leistungen
-              </a>
-            </li>
-            <li>
-              <a href="#preise" className="text-white hover:text-primary transition-colors">
-                Preise
-              </a>
-            </li>
-            <li>
-              <a href="#kontakt" className="text-white hover:text-primary transition-colors">
-                Kontakt
-              </a>
-            </li>
-          </ul>
+
+          {/* Desktop Navigation */}
+          <NavigationMenu className="hidden md:block">
+            <NavigationMenuList className="space-x-2">
+              <NavigationMenuItem>
+                <Link href="/" legacyBehavior passHref>
+                  <NavigationMenuLink className="text-white hover:text-primary transition-colors px-4 py-2 uppercase font-medium">
+                    Home
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-white hover:text-primary bg-transparent uppercase font-medium">
+                  Services
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="w-[200px] p-2 bg-gray-900 border border-gray-800">
+                    <li>
+                      <Link href="/laserreinigung" legacyBehavior passHref>
+                        <NavigationMenuLink className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md">
+                          Laserreinigung
+                        </NavigationMenuLink>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/sandstrahlen" legacyBehavior passHref>
+                        <NavigationMenuLink className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md">
+                          Sandstrahlen
+                        </NavigationMenuLink>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/trockenreinigung" legacyBehavior passHref>
+                        <NavigationMenuLink className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md">
+                          Trockenreinigung
+                        </NavigationMenuLink>
+                      </Link>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <Link href="/kontakt" legacyBehavior passHref>
+                  <NavigationMenuLink className="text-white hover:text-primary transition-colors px-4 py-2 uppercase font-medium">
+                    Kontakt
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
           <div className="md:hidden">
             <Hamburger
               toggled={mobileMenuOpen}
@@ -65,40 +106,49 @@ export default function Header() {
           <div className="md:hidden mt-4 pb-4 bg-gray-900 rounded-lg p-4 overflow-hidden animate-slideDown">
             <ul className="space-y-2">
               <li>
-                <a
-                  href="#home"
+                <Link
+                  href="/"
                   className="block text-white hover:text-primary transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#leistungen"
+                <Link
+                  href="/laserreinigung"
                   className="block text-white hover:text-primary transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Leistungen
-                </a>
+                  Laserreinigung
+                </Link>
               </li>
               <li>
-                <a
-                  href="#preise"
+                <Link
+                  href="/sandstrahlen"
                   className="block text-white hover:text-primary transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Preise
-                </a>
+                  Sandstrahlen
+                </Link>
               </li>
               <li>
-                <a
-                  href="#kontakt"
+                <Link
+                  href="/trockenreinigung"
+                  className="block text-white hover:text-primary transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Trockenreinigung
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/kontakt"
                   className="block text-white hover:text-primary transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Kontakt
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
