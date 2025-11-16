@@ -90,6 +90,15 @@ export default function Header() {
                   className="text-white hover:text-primary transition-colors px-4 py-2 uppercase font-medium"
                   asChild
                 >
+                  <Link href="/galerie">Galerie</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className="text-white hover:text-primary transition-colors px-4 py-2 uppercase font-medium"
+                  asChild
+                >
                   <Link href="/kontakt">Kontakt</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -144,6 +153,15 @@ export default function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Trockenreinigung
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/galerie"
+                  className="block text-white hover:text-primary transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Galerie
                 </Link>
               </li>
               <li>

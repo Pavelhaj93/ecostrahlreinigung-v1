@@ -52,6 +52,7 @@ export const page = defineType({
         {type: 'servicesSection'},
         {type: 'pricingSection'},
         {type: 'galleryCarousel'},
+        {type: 'masonryGallerySection'},
         {type: 'contactSection'},
       ],
       options: {
