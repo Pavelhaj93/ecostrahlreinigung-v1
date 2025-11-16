@@ -110,15 +110,15 @@ export default function GalleryCarousel({block}: GalleryCarouselProps = {}) {
                   key={item._key || index}
                   className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
                 >
-                  <div className="group cursor-pointer">
-                    <div className="relative overflow-hidden rounded-lg bg-gray-950 border border-gray-800 hover:border-yellow-500 transition-all duration-300">
+                  <div>
+                    <div className="relative overflow-hidden rounded-lg bg-gray-950 border border-gray-800">
                       <div className="relative h-64 w-full overflow-hidden">
                         {item.image ? (
                           <Image
                             src={urlForImage(item.image)?.width(800).height(600).url() || ''}
                             alt={item.title}
                             fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-110"
+                            className="object-cover"
                           />
                         ) : (
                           <div className="w-full h-full bg-gray-800 flex items-center justify-center">

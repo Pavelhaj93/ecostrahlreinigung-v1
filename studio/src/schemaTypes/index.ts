@@ -8,6 +8,7 @@ import {servicesSection} from './objects/servicesSection'
 import {pricingSection} from './objects/pricingSection'
 import {galleryCarousel} from './objects/galleryCarousel'
 import {contactSection} from './objects/contactSection'
+import {serviceIntroSection} from './objects/serviceIntroSection'
 import {settings} from './singletons/settings'
 import {link} from './objects/link'
 import {blockContent} from './objects/blockContent'
@@ -30,5 +31,6 @@ export const schemaTypes = [
   pricingSection,
   galleryCarousel,
   contactSection,
+  serviceIntroSection,
   link,
 ]

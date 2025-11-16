@@ -7,6 +7,7 @@ import ServicesSection from '@/app/components/ServicesSection'
 import PricingSection from '@/app/components/PricingSection'
 import GalleryCarousel from '@/app/components/GalleryCarousel'
 import ContactSection from '@/app/components/ContactSection'
+import ServiceIntroSection from '@/app/components/ServiceIntroSection'
 import {dataAttr} from '@/sanity/lib/utils'
 
 type BlocksType = {
@@ -33,6 +34,7 @@ const Blocks: BlocksType = {
   pricingSection: PricingSection,
   galleryCarousel: GalleryCarousel,
   contactSection: ContactSection,
+  serviceIntroSection: ServiceIntroSection,
 }
 
 /**

@@ -78,7 +78,7 @@ export default function Header() {
                         className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md"
                         asChild
                       >
-                        <Link href="/trockenreinigung">Trockenreinigung</Link>
+                        <Link href="/trockeneisreinigung">Trockeneisreinigung</Link>
                       </NavigationMenuLink>
                     </li>
                   </ul>

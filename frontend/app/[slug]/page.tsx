@@ -57,20 +57,27 @@ export default async function Page(props: Props) {
   }
 
   return (
-    <div className="my-12 lg:my-24">
+    <div className="min-h-screen bg-black">
       <Head>
         <title>{page.heading}</title>
       </Head>
-      <div className="">
-        <div className="container">
-          <div className="pb-6 border-b border-gray-100">
-            <div className="max-w-3xl">
-              <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
-                {page.heading}
-              </h2>
-              <p className="mt-4 text-base lg:text-lg leading-relaxed text-gray-600 uppercase font-light">
+      {/* Hero Heading Section */}
+      <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 py-20 lg:py-28 border-b border-gray-800">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl mb-6">
+              {page.heading}
+            </h1>
+            {page.subheading && (
+              <p className="text-lg lg:text-xl leading-relaxed text-gray-300 uppercase font-light tracking-wide">
                 {page.subheading}
               </p>
+            )}
+            {/* Decorative line */}
+            <div className="mt-8 flex items-center justify-center gap-4">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary"></div>
+              <div className="h-2 w-2 bg-primary rounded-full"></div>
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary"></div>
             </div>
           </div>
         </div>
