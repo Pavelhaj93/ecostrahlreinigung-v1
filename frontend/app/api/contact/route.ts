@@ -1,4 +1,5 @@
 import {NextRequest, NextResponse} from 'next/server'
+import nodemailer from 'nodemailer'
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,15 +20,45 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Here you would normally:
-    // 1. Send email using a service like Nodemailer, SendGrid, etc.
-    // 2. Save to database
-    // 3. Send to your email address
+    // Create transporter with Active24 SMTP settings
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || 'smtp.active24.cz',
+      port: parseInt(process.env.SMTP_PORT || '587'),
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: process.env.SMTP_USER, // your email: info@ecostrahlreinigung.de
+        pass: process.env.SMTP_PASSWORD, // your email password
+      },
+    })
 
-    // console.log('Contact form submission:', {name, email, message, privacyAccepted})
+    // Email content
+    const mailOptions = {
+      from: process.env.SMTP_USER,
+      to: 'info@ecostrahlreinigung.de',
+      subject: `Neue Kontaktanfrage von ${name}`,
+      text: `
+Name: ${name}
+E-Mail: ${email}
 
-    // For now, just return success
-    // In a real implementation, you would send the email here
+Nachricht:
+${message}
+      `,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #333;">Neue Kontaktanfrage</h2>
+          <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px;">
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>E-Mail:</strong> <a href="mailto:${email}">${email}</a></p>
+            <hr style="border: 1px solid #ddd;">
+            <p><strong>Nachricht:</strong></p>
+            <p style="white-space: pre-wrap;">${message}</p>
+          </div>
+        </div>
+      `,
+    }
+
+    // Send email
+    await transporter.sendMail(mailOptions)
 
     return NextResponse.json(
       {message: 'Vielen Dank für Ihre Nachricht! Wir melden uns bald bei Ihnen.'},
