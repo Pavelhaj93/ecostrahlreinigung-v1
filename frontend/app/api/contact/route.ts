@@ -20,16 +20,42 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Check if environment variables are set
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
+      console.error('SMTP credentials not configured')
+      return NextResponse.json(
+        {error: 'E-Mail-Dienst ist nicht konfiguriert. Bitte kontaktieren Sie uns direkt.'},
+        {status: 500},
+      )
+    }
+
     // Create transporter with Active24 SMTP settings
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.active24.cz',
+      host: process.env.SMTP_HOST || 'smtp.cz',
       port: parseInt(process.env.SMTP_PORT || '587'),
       secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.SMTP_USER, // your email: info@ecostrahlreinigung.de
         pass: process.env.SMTP_PASSWORD, // your email password
       },
+      debug: true, // Enable debug output
+      logger: true, // Log to console
     })
+
+    // Verify connection
+    try {
+      await transporter.verify()
+      console.log('SMTP connection verified')
+    } catch (verifyError) {
+      console.error('SMTP verification failed:', verifyError)
+      return NextResponse.json(
+        {
+          error:
+            'E-Mail-Verbindung konnte nicht hergestellt werden. Bitte versuchen Sie es später erneut.',
+        },
+        {status: 500},
+      )
+    }
 
     // Email content
     const mailOptions = {
@@ -66,8 +92,16 @@ ${message}
     )
   } catch (error) {
     console.error('Contact form error:', error)
+    // Return more detailed error information
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unbekannter Fehler beim Senden der Nachricht.'
+    console.error('Detailed error:', errorMessage)
+
     return NextResponse.json(
-      {error: 'Fehler beim Senden der Nachricht. Bitte versuchen Sie es erneut.'},
+      {
+        error: 'Fehler beim Senden der Nachricht. Bitte versuchen Sie es erneut.',
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined,
+      },
       {status: 500},
     )
   }
