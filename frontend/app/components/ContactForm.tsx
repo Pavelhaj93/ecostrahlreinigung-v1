@@ -3,6 +3,7 @@
 import {useState} from 'react'
 import {Button} from '@/components/ui/button'
 import Link from 'next/link'
+import {toast} from 'sonner'
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -12,12 +13,10 @@ export default function ContactForm() {
     privacyAccepted: false,
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitMessage, setSubmitMessage] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    setSubmitMessage('')
 
     try {
       const response = await fetch('/api/contact', {
@@ -31,13 +30,19 @@ export default function ContactForm() {
       const data = await response.json()
 
       if (response.ok) {
-        setSubmitMessage(data.message)
+        toast.success('Nachricht erfolgreich gesendet!', {
+          description: 'Vielen Dank für Ihre Nachricht. Wir melden uns bald bei Ihnen.',
+        })
         setFormData({name: '', email: '', message: '', privacyAccepted: false})
       } else {
-        setSubmitMessage(data.error || 'Fehler beim Senden der Nachricht.')
+        toast.error('Fehler beim Senden', {
+          description: data.error || 'Bitte versuchen Sie es später erneut.',
+        })
       }
     } catch (error) {
-      setSubmitMessage('Fehler beim Senden der Nachricht. Bitte versuchen Sie es erneut.')
+      toast.error('Fehler beim Senden', {
+        description: 'Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung.',
+      })
     }
 
     setIsSubmitting(false)
@@ -133,14 +138,6 @@ export default function ContactForm() {
       >
         {isSubmitting ? 'Wird gesendet...' : 'Nachricht senden'}
       </Button>
-
-      {submitMessage && (
-        <div
-          className={`mt-4 p-3 rounded-md ${submitMessage.includes('Fehler') ? 'bg-red-900/50 text-red-200 border border-red-800' : 'bg-green-900/50 text-green-200 border border-green-800'}`}
-        >
-          {submitMessage}
-        </div>
-      )}
     </form>
   )
 }

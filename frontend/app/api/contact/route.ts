@@ -13,8 +13,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    console.log('ttt called')
-
     if (!privacyAccepted) {
       return NextResponse.json(
         {error: 'Bitte akzeptieren Sie die Datenschutzerklärung.'},

@@ -43,8 +43,6 @@ export default function ServicesSection({block}: ServicesSectionProps = {}) {
   const heading = block?.heading || 'Unsere Leistungen'
   const cleaningExamples = block?.cleaningExamples || defaultCleaningExamples
 
-  console.log('ttt service', block?.services?.[0])
-
   return (
     <section id="leistungen" className="py-20 bg-black">
       <div className="container mx-auto px-6">
