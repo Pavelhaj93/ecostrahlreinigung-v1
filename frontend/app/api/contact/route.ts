@@ -13,6 +13,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    console.log('ttt called')
+
     if (!privacyAccepted) {
       return NextResponse.json(
         {error: 'Bitte akzeptieren Sie die Datenschutzerklärung.'},
@@ -31,15 +33,13 @@ export async function POST(request: NextRequest) {
 
     // Create transporter with Active24 SMTP settings
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.cz',
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: false, // true for 465, false for other ports
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT || '465'),
+      secure: process.env.SMTP_PORT === '465',
       auth: {
-        user: process.env.SMTP_USER, // your email: info@ecostrahlreinigung.de
-        pass: process.env.SMTP_PASSWORD, // your email password
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD,
       },
-      debug: true, // Enable debug output
-      logger: true, // Log to console
     })
 
     // Verify connection
