@@ -21,21 +21,23 @@ export default function Header() {
       <nav className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           {/* Logo with text */}
-          <div className="flex items-center gap-3">
-            <Image
-              src="/images/logo-triangle-yellow.png"
-              alt="Ecostrahlreinigung Logo"
-              width={80}
-              height={80}
-              className="-my-2 w-15 sm:w-16 h-auto object-contain"
-            />
-            {/* Brand text - hidden on mobile */}
-            <div className="flex flex-row sm:flex-col leading-tight uppercase italic font-bold text-lg">
-              <span className="text-yellow-300">
-                ECO<span className="text-white">STRAHLREINIGUNG</span>
-              </span>
+          <Link href="/">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/images/logo-triangle-yellow.png"
+                alt="Ecostrahlreinigung Logo"
+                width={80}
+                height={80}
+                className="-my-2 w-15 sm:w-16 h-auto object-contain"
+              />
+              {/* Brand text - hidden on mobile */}
+              <div className="flex flex-row sm:flex-col leading-tight uppercase italic font-bold text-lg">
+                <span className="text-yellow-300">
+                  ECO<span className="text-white">STRAHLREINIGUNG</span>
+                </span>
+              </div>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <NavigationMenu className="hidden md:block">
