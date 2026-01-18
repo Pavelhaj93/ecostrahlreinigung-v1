@@ -12,7 +12,7 @@
  * ---------------------------------------------------------------------------------
  */
 
-// Source: schema.json
+// Source: ../studio/schema.json
 export type CallToAction = {
   _type: 'callToAction'
   heading: string
@@ -526,8 +526,16 @@ export type AllSanitySchemaTypes =
   | Geopoint
   | Slug
   | SanityAssetSourceData
+
 export declare const internalGroqTypeReferenceTo: unique symbol
-// Source: ./sanity/lib/queries.ts
+
+type ArrayOf<T> = Array<
+  T & {
+    _key: string
+  }
+>
+
+// Source: sanity/lib/queries.ts
 // Variable: settingsQuery
 // Query: *[_type == "settings"][0]
 export type SettingsQueryResult = {
@@ -584,6 +592,8 @@ export type SettingsQueryResult = {
     _type: 'image'
   }
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: getPageQuery
 // Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "heroCarousel" => {        slides[]{          _key,          title,          subtitle,          description,          buttonText,          buttonLink,          image{            ...,            asset          }        }      },      _type == "servicesSection" => {        heading,        services[]{          _key,          title,          image{            ...,            asset          },          showMoreButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          },          advantages,          description[]{            ...,            markDefs[]{              ...,                _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }            }          }        },        cleaningExamples{          heading,          examples        }      },      _type == "pricingSection" => {        heading,        pricingCards[]{          _key,          serviceName,          price,          priceUnit,          priceColor        }      },      _type == "galleryCarousel" => {        heading,        subheading,        galleryItems[]{          _key,          title,          description,          image{            ...,            asset          }        }      },      _type == "contactSection" => {        heading,        subheading,        description,        contactInfo{          address,          email,          phone        },        showForm      },    },  }
 export type GetPageQueryResult = {
@@ -639,6 +649,8 @@ export type GetPageQueryResult = {
       }
   > | null
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: getHomepageQuery
 // Query: *[_type == 'page' && slug.current == '/'][0]{    _id,    _type,    name,    slug,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "heroCarousel" => {        slides[]{          _key,          title,          subtitle,          description,          buttonText,          buttonLink,          image{            ...,            asset          }        }      },      _type == "servicesSection" => {        heading,        services[]{          _key,          title,          image{            ...,            asset          },          showMoreButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          },          advantages,          description[]{            ...,            markDefs[]{              ...,                _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }            }          }        },        cleaningExamples{          heading,          examples        }      },      _type == "pricingSection" => {        heading,        pricingCards[]{          _key,          serviceName,          price,          priceUnit,          priceColor        }      },      _type == "galleryCarousel" => {        heading,        subheading,        galleryItems[]{          _key,          title,          description,          image{            ...,            asset          }        }      },      _type == "contactSection" => {        heading,        subheading,        description,        contactInfo{          address,          email,          phone        },        showForm      },    },  }
 export type GetHomepageQueryResult = {
@@ -692,6 +704,8 @@ export type GetHomepageQueryResult = {
       }
   > | null
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: sitemapData
 // Query: *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
 export type SitemapDataResult = Array<
@@ -706,6 +720,8 @@ export type SitemapDataResult = Array<
       _updatedAt: string
     }
 >
+
+// Source: sanity/lib/queries.ts
 // Variable: allPostsQuery
 // Query: *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
 export type AllPostsQueryResult = Array<{
@@ -746,6 +762,8 @@ export type AllPostsQueryResult = Array<{
     }
   } | null
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: morePostsQuery
 // Query: *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
 export type MorePostsQueryResult = Array<{
@@ -786,6 +804,8 @@ export type MorePostsQueryResult = Array<{
     }
   } | null
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: postQuery
 // Query: *[_type == "post" && slug.current == $slug] [0] {    content[]{    ...,    markDefs[]{      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }    }  },      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
 export type PostQueryResult = {
@@ -848,11 +868,15 @@ export type PostQueryResult = {
     }
   } | null
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: postPagesSlugs
 // Query: *[_type == "post" && defined(slug.current)]  {"slug": slug.current}
 export type PostPagesSlugsResult = Array<{
   slug: string
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: pagesSlugs
 // Query: *[_type == "page" && defined(slug.current)]  {"slug": slug.current}
 export type PagesSlugsResult = Array<{
