@@ -13,38 +13,132 @@
  */
 
 // Source: ../studio/schema.json
-export type CallToAction = {
-  _type: 'callToAction'
-  heading: string
+export type CleaningExamples = {
+  heading?: string
+  examples?: string
+}
+
+export type ContactInfo = {
+  address?: string
+  email?: string
+  phone?: string
+}
+
+export type SanityImageAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type ObjectImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type ServicesObjectImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type ShowMoreButton = {
   text?: string
-  buttonText?: string
   link?: Link
+}
+
+export type GalleryItemsObjectImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "object.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type PageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'page'
+}
+
+export type PostReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'post'
 }
 
 export type Link = {
   _type: 'link'
   linkType?: 'href' | 'page' | 'post'
   href?: string
-  page?: {
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    [internalGroqTypeReferenceTo]?: 'page'
-  }
-  post?: {
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    [internalGroqTypeReferenceTo]?: 'post'
-  }
+  page?: PageReference
+  post?: PostReference
   openInNewTab?: boolean
 }
 
-export type InfoSection = {
-  _type: 'infoSection'
-  heading?: string
+export type SanityFileAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+}
+
+export type VideoSection = {
+  _type: 'videoSection'
+  videoUrl?: string
+  videoFile?: {
+    asset?: SanityFileAssetReference
+    media?: unknown
+    _type: 'file'
+  }
+  title?: string
+  subtitle?: string
+  description?: string
+  buttonText?: string
+  buttonLink?: string
+  overlayContent?: boolean
+  autoplay?: boolean
+  muted?: boolean
+  loop?: boolean
+  controls?: boolean
+}
+
+export type MasonryGallerySection = {
+  _type: 'masonryGallerySection'
+  heading: string
   subheading?: string
-  content?: Array<{
+  images: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  imagesPerLoad: number
+}
+
+export type ServiceIntroSection = {
+  _type: 'serviceIntroSection'
+  heading: string
+  subheading?: string
+  image: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  description: Array<{
     children?: Array<{
       marks?: Array<string>
       text?: string
@@ -54,21 +148,7 @@ export type InfoSection = {
     style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
     listItem?: 'bullet' | 'number'
     markDefs?: Array<{
-      linkType?: 'href' | 'page' | 'post'
       href?: string
-      page?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'page'
-      }
-      post?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'post'
-      }
-      openInNewTab?: boolean
       _type: 'link'
       _key: string
     }>
@@ -76,6 +156,105 @@ export type InfoSection = {
     _type: 'block'
     _key: string
   }>
+  features?: Array<{
+    text: string
+    _key: string
+  }>
+  priceLabel?: string
+  priceValue?: string
+  priceDetails?: string
+}
+
+export type ContactSection = {
+  _type: 'contactSection'
+  heading: string
+  subheading?: string
+  description?: string
+  contactInfo?: ContactInfo
+  showForm?: boolean
+}
+
+export type GalleryCarousel = {
+  _type: 'galleryCarousel'
+  heading: string
+  subheading?: string
+  galleryItems: Array<{
+    image: GalleryItemsObjectImage
+    title: string
+    description?: string
+    _key: string
+  }>
+}
+
+export type PricingSection = {
+  _type: 'pricingSection'
+  heading: string
+  pricingCards: Array<{
+    serviceName: string
+    price: string
+    priceUnit?: string
+    priceColor?: 'text-yellow-300' | 'text-yellow-400' | 'text-yellow-500'
+    _key: string
+  }>
+}
+
+export type ServicesSection = {
+  _type: 'servicesSection'
+  heading: string
+  services: Array<{
+    title: string
+    image: ServicesObjectImage
+    description: Array<{
+      children?: Array<{
+        marks?: Array<string>
+        text?: string
+        _type: 'span'
+        _key: string
+      }>
+      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+      listItem?: 'bullet' | 'number'
+      markDefs?: Array<{
+        href?: string
+        _type: 'link'
+        _key: string
+      }>
+      level?: number
+      _type: 'block'
+      _key: string
+    }>
+    advantages?: string
+    showMoreButton?: ShowMoreButton
+    _key: string
+  }>
+  cleaningExamples?: CleaningExamples
+}
+
+export type HeroCarousel = {
+  _type: 'heroCarousel'
+  slides: Array<{
+    image: ObjectImage
+    title: string
+    subtitle: string
+    description: string
+    buttonText?: string
+    buttonLink?: string
+    _key: string
+  }>
+}
+
+export type CallToAction = {
+  _type: 'callToAction'
+  heading: string
+  text?: string
+  buttonText?: string
+  link?: Link
+}
+
+export type InfoSection = {
+  _type: 'infoSection'
+  heading?: string
+  subheading?: string
+  content?: BlockContent
 }
 
 export type BlockContent = Array<{
@@ -90,18 +269,8 @@ export type BlockContent = Array<{
   markDefs?: Array<{
     linkType?: 'href' | 'page' | 'post'
     href?: string
-    page?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'page'
-    }
-    post?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'post'
-    }
+    page?: PageReference
+    post?: PostReference
     openInNewTab?: boolean
     _type: 'link'
     _key: string
@@ -130,18 +299,8 @@ export type Settings = {
     markDefs?: Array<{
       linkType?: 'href' | 'page' | 'post'
       href?: string
-      page?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'page'
-      }
-      post?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'post'
-      }
+      page?: PageReference
+      post?: PostReference
       openInNewTab?: boolean
       _type: 'link'
       _key: string
@@ -151,12 +310,7 @@ export type Settings = {
     _key: string
   }>
   ogImage?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
+    asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
@@ -164,6 +318,22 @@ export type Settings = {
     metadataBase?: string
     _type: 'image'
   }
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
 }
 
 export type Page = {
@@ -179,11 +349,42 @@ export type Page = {
   pageBuilder?: Array<
     | ({
         _key: string
+      } & ServiceIntroSection)
+    | ({
+        _key: string
       } & CallToAction)
     | ({
         _key: string
       } & InfoSection)
+    | ({
+        _key: string
+      } & HeroCarousel)
+    | ({
+        _key: string
+      } & ServicesSection)
+    | ({
+        _key: string
+      } & PricingSection)
+    | ({
+        _key: string
+      } & GalleryCarousel)
+    | ({
+        _key: string
+      } & MasonryGallerySection)
+    | ({
+        _key: string
+      } & ContactSection)
+    | ({
+        _key: string
+      } & VideoSection)
   >
+}
+
+export type PersonReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'person'
 }
 
 export type Post = {
@@ -197,12 +398,7 @@ export type Post = {
   content?: BlockContent
   excerpt?: string
   coverImage: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
+    asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
@@ -210,12 +406,7 @@ export type Post = {
     _type: 'image'
   }
   date?: string
-  author?: {
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    [internalGroqTypeReferenceTo]?: 'person'
-  }
+  author?: PersonReference
 }
 
 export type Person = {
@@ -227,18 +418,19 @@ export type Person = {
   firstName: string
   lastName: string
   picture: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
+    asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     alt?: string
     _type: 'image'
   }
+}
+
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
 }
 
 export type SanityAssistInstructionTask = {
@@ -279,14 +471,16 @@ export type SanityAssistOutputField = {
   path?: string
 }
 
+export type AssistInstructionContextReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'assist.instruction.context'
+}
+
 export type SanityAssistInstructionContext = {
   _type: 'sanity.assist.instruction.context'
-  reference: {
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    [internalGroqTypeReferenceTo]?: 'assist.instruction.context'
-  }
+  reference: AssistInstructionContextReference
 }
 
 export type AssistInstructionContext = {
@@ -397,25 +591,21 @@ export type SanityImagePalette = {
 
 export type SanityImageDimensions = {
   _type: 'sanity.imageDimensions'
-  height?: number
-  width?: number
-  aspectRatio?: number
+  height: number
+  width: number
+  aspectRatio: number
 }
 
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
+export type SanityImageMetadata = {
+  _type: 'sanity.imageMetadata'
+  location?: Geopoint
+  dimensions?: SanityImageDimensions
+  palette?: SanityImagePalette
+  lqip?: string
+  blurHash?: string
+  thumbHash?: string
+  hasAlpha?: boolean
+  isOpaque?: boolean
 }
 
 export type SanityFileAsset = {
@@ -438,6 +628,13 @@ export type SanityFileAsset = {
   path?: string
   url?: string
   source?: SanityAssetSourceData
+}
+
+export type SanityAssetSourceData = {
+  _type: 'sanity.assetSourceData'
+  name?: string
+  id?: string
+  url?: string
 }
 
 export type SanityImageAsset = {
@@ -463,17 +660,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData
 }
 
-export type SanityImageMetadata = {
-  _type: 'sanity.imageMetadata'
-  location?: Geopoint
-  dimensions?: SanityImageDimensions
-  palette?: SanityImagePalette
-  lqip?: string
-  blurHash?: string
-  hasAlpha?: boolean
-  isOpaque?: boolean
-}
-
 export type Geopoint = {
   _type: 'geopoint'
   lat?: number
@@ -481,33 +667,43 @@ export type Geopoint = {
   alt?: number
 }
 
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
-}
-
-export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData'
-  name?: string
-  id?: string
-  url?: string
-}
-
 export type AllSanitySchemaTypes =
-  | CallToAction
+  | CleaningExamples
+  | ContactInfo
+  | SanityImageAssetReference
+  | ObjectImage
+  | ServicesObjectImage
+  | ShowMoreButton
+  | GalleryItemsObjectImage
+  | PageReference
+  | PostReference
   | Link
+  | SanityFileAssetReference
+  | VideoSection
+  | MasonryGallerySection
+  | ServiceIntroSection
+  | ContactSection
+  | GalleryCarousel
+  | PricingSection
+  | ServicesSection
+  | HeroCarousel
+  | CallToAction
   | InfoSection
   | BlockContent
   | Settings
+  | SanityImageCrop
+  | SanityImageHotspot
   | Page
+  | PersonReference
   | Post
   | Person
+  | Slug
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations
   | SanityAssistOutputType
   | SanityAssistOutputField
+  | AssistInstructionContextReference
   | SanityAssistInstructionContext
   | AssistInstructionContext
   | SanityAssistInstructionUserInput
@@ -518,14 +714,11 @@ export type AllSanitySchemaTypes =
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
-  | SanityImageHotspot
-  | SanityImageCrop
-  | SanityFileAsset
-  | SanityImageAsset
   | SanityImageMetadata
-  | Geopoint
-  | Slug
+  | SanityFileAsset
   | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint
 
 export declare const internalGroqTypeReferenceTo: unique symbol
 
@@ -557,18 +750,8 @@ export type SettingsQueryResult = {
     markDefs?: Array<{
       linkType?: 'href' | 'page' | 'post'
       href?: string
-      page?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'page'
-      }
-      post?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'post'
-      }
+      page?: PageReference
+      post?: PostReference
       openInNewTab?: boolean
       _type: 'link'
       _key: string
@@ -578,12 +761,7 @@ export type SettingsQueryResult = {
     _key: string
   }>
   ogImage?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
+    asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
@@ -595,7 +773,7 @@ export type SettingsQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "heroCarousel" => {        slides[]{          _key,          title,          subtitle,          description,          buttonText,          buttonLink,          image{            ...,            asset          }        }      },      _type == "servicesSection" => {        heading,        services[]{          _key,          title,          image{            ...,            asset          },          showMoreButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          },          advantages,          description[]{            ...,            markDefs[]{              ...,                _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }            }          }        },        cleaningExamples{          heading,          examples        }      },      _type == "pricingSection" => {        heading,        pricingCards[]{          _key,          serviceName,          price,          priceUnit,          priceColor        }      },      _type == "galleryCarousel" => {        heading,        subheading,        galleryItems[]{          _key,          title,          description,          image{            ...,            asset          }        }      },      _type == "contactSection" => {        heading,        subheading,        description,        contactInfo{          address,          email,          phone        },        showForm      },    },  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "heroCarousel" => {        slides[]{          _key,          title,          subtitle,          description,          buttonText,          buttonLink,          image{            ...,            asset          }        }      },      _type == "videoSection" => {        videoUrl,        videoFile{          asset->{            url          }        },        title,        subtitle,        description,        buttonText,        buttonLink,        overlayContent,        autoplay,        muted,        loop,        controls      },      _type == "servicesSection" => {        heading,        services[]{          _key,          title,          image{            ...,            asset          },          showMoreButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          },          advantages,          description[]{            ...,            markDefs[]{              ...,                _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }            }          }        },        cleaningExamples{          heading,          examples        }      },      _type == "pricingSection" => {        heading,        pricingCards[]{          _key,          serviceName,          price,          priceUnit,          priceColor        }      },      _type == "galleryCarousel" => {        heading,        subheading,        galleryItems[]{          _key,          title,          description,          image{            ...,            asset          }        }      },      _type == "contactSection" => {        heading,        subheading,        description,        contactInfo{          address,          email,          phone        },        showForm      },    },  }
 export type GetPageQueryResult = {
   _id: string
   _type: 'page'
@@ -621,6 +799,56 @@ export type GetPageQueryResult = {
       }
     | {
         _key: string
+        _type: 'contactSection'
+        heading: string
+        subheading: string | null
+        description: string | null
+        contactInfo: {
+          address: string | null
+          email: string | null
+          phone: string | null
+        } | null
+        showForm: boolean | null
+      }
+    | {
+        _key: string
+        _type: 'galleryCarousel'
+        heading: string
+        subheading: string | null
+        galleryItems: Array<{
+          _key: string
+          title: string
+          description: string | null
+          image: {
+            asset: SanityImageAssetReference | null
+            media?: unknown // Unable to locate the referenced type "object.image.media" in schema
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          }
+        }>
+      }
+    | {
+        _key: string
+        _type: 'heroCarousel'
+        slides: Array<{
+          _key: string
+          title: string
+          subtitle: string
+          description: string
+          buttonText: string | null
+          buttonLink: string | null
+          image: {
+            asset: SanityImageAssetReference | null
+            media?: unknown // Unable to locate the referenced type "media" in schema
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          }
+        }>
+      }
+    | {
+        _key: string
         _type: 'infoSection'
         heading?: string
         subheading?: string
@@ -647,12 +875,151 @@ export type GetPageQueryResult = {
           _key: string
         }> | null
       }
+    | {
+        _key: string
+        _type: 'masonryGallerySection'
+        heading: string
+        subheading?: string
+        images: Array<{
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          alt?: string
+          caption?: string
+          _type: 'image'
+          _key: string
+        }>
+        imagesPerLoad: number
+      }
+    | {
+        _key: string
+        _type: 'pricingSection'
+        heading: string
+        pricingCards: Array<{
+          _key: string
+          serviceName: string
+          price: string
+          priceUnit: string | null
+          priceColor: 'text-yellow-300' | 'text-yellow-400' | 'text-yellow-500' | null
+        }>
+      }
+    | {
+        _key: string
+        _type: 'serviceIntroSection'
+        heading: string
+        subheading?: string
+        image: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        description: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+          listItem?: 'bullet' | 'number'
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        features?: Array<{
+          text: string
+          _key: string
+        }>
+        priceLabel?: string
+        priceValue?: string
+        priceDetails?: string
+      }
+    | {
+        _key: string
+        _type: 'servicesSection'
+        heading: string
+        services: Array<{
+          _key: string
+          title: string
+          image: {
+            asset: SanityImageAssetReference | null
+            media?: unknown // Unable to locate the referenced type "image.media" in schema
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          }
+          showMoreButton: {
+            text?: string
+            link: {
+              _type: 'link'
+              linkType?: 'href' | 'page' | 'post'
+              href?: string
+              page: string | null
+              post: string | null
+              openInNewTab?: boolean
+            } | null
+          } | null
+          advantages: string | null
+          description: Array<{
+            children?: Array<{
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }>
+            style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+            listItem?: 'bullet' | 'number'
+            markDefs: Array<{
+              href?: string
+              _type: 'link'
+              _key: string
+              page: null
+              post: null
+            }> | null
+            level?: number
+            _type: 'block'
+            _key: string
+          }>
+        }>
+        cleaningExamples: {
+          heading: string | null
+          examples: string | null
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'videoSection'
+        videoUrl: string | null
+        videoFile: {
+          asset: {
+            url: string | null
+          } | null
+        } | null
+        title: string | null
+        subtitle: string | null
+        description: string | null
+        buttonText: string | null
+        buttonLink: string | null
+        overlayContent: boolean | null
+        autoplay: boolean | null
+        muted: boolean | null
+        loop: boolean | null
+        controls: boolean | null
+      }
   > | null
 } | null
 
 // Source: sanity/lib/queries.ts
 // Variable: getHomepageQuery
-// Query: *[_type == 'page' && slug.current == '/'][0]{    _id,    _type,    name,    slug,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "heroCarousel" => {        slides[]{          _key,          title,          subtitle,          description,          buttonText,          buttonLink,          image{            ...,            asset          }        }      },      _type == "servicesSection" => {        heading,        services[]{          _key,          title,          image{            ...,            asset          },          showMoreButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          },          advantages,          description[]{            ...,            markDefs[]{              ...,                _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }            }          }        },        cleaningExamples{          heading,          examples        }      },      _type == "pricingSection" => {        heading,        pricingCards[]{          _key,          serviceName,          price,          priceUnit,          priceColor        }      },      _type == "galleryCarousel" => {        heading,        subheading,        galleryItems[]{          _key,          title,          description,          image{            ...,            asset          }        }      },      _type == "contactSection" => {        heading,        subheading,        description,        contactInfo{          address,          email,          phone        },        showForm      },    },  }
+// Query: *[_type == 'page' && slug.current == '/'][0]{    _id,    _type,    name,    slug,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "heroCarousel" => {        slides[]{          _key,          title,          subtitle,          description,          buttonText,          buttonLink,          image{            ...,            asset          }        }      },      _type == "videoSection" => {        videoUrl,        videoFile{          asset->{            url          }        },        title,        subtitle,        description,        buttonText,        buttonLink,        overlayContent,        autoplay,        muted,        loop,        controls      },      _type == "servicesSection" => {        heading,        services[]{          _key,          title,          image{            ...,            asset          },          showMoreButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          },          advantages,          description[]{            ...,            markDefs[]{              ...,                _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }            }          }        },        cleaningExamples{          heading,          examples        }      },      _type == "pricingSection" => {        heading,        pricingCards[]{          _key,          serviceName,          price,          priceUnit,          priceColor        }      },      _type == "galleryCarousel" => {        heading,        subheading,        galleryItems[]{          _key,          title,          description,          image{            ...,            asset          }        }      },      _type == "contactSection" => {        heading,        subheading,        description,        contactInfo{          address,          email,          phone        },        showForm      },    },  }
 export type GetHomepageQueryResult = {
   _id: string
   _type: 'page'
@@ -676,6 +1043,56 @@ export type GetHomepageQueryResult = {
       }
     | {
         _key: string
+        _type: 'contactSection'
+        heading: string
+        subheading: string | null
+        description: string | null
+        contactInfo: {
+          address: string | null
+          email: string | null
+          phone: string | null
+        } | null
+        showForm: boolean | null
+      }
+    | {
+        _key: string
+        _type: 'galleryCarousel'
+        heading: string
+        subheading: string | null
+        galleryItems: Array<{
+          _key: string
+          title: string
+          description: string | null
+          image: {
+            asset: SanityImageAssetReference | null
+            media?: unknown // Unable to locate the referenced type "object.image.media" in schema
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          }
+        }>
+      }
+    | {
+        _key: string
+        _type: 'heroCarousel'
+        slides: Array<{
+          _key: string
+          title: string
+          subtitle: string
+          description: string
+          buttonText: string | null
+          buttonLink: string | null
+          image: {
+            asset: SanityImageAssetReference | null
+            media?: unknown // Unable to locate the referenced type "media" in schema
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          }
+        }>
+      }
+    | {
+        _key: string
         _type: 'infoSection'
         heading?: string
         subheading?: string
@@ -701,6 +1118,145 @@ export type GetHomepageQueryResult = {
           _type: 'block'
           _key: string
         }> | null
+      }
+    | {
+        _key: string
+        _type: 'masonryGallerySection'
+        heading: string
+        subheading?: string
+        images: Array<{
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          alt?: string
+          caption?: string
+          _type: 'image'
+          _key: string
+        }>
+        imagesPerLoad: number
+      }
+    | {
+        _key: string
+        _type: 'pricingSection'
+        heading: string
+        pricingCards: Array<{
+          _key: string
+          serviceName: string
+          price: string
+          priceUnit: string | null
+          priceColor: 'text-yellow-300' | 'text-yellow-400' | 'text-yellow-500' | null
+        }>
+      }
+    | {
+        _key: string
+        _type: 'serviceIntroSection'
+        heading: string
+        subheading?: string
+        image: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        description: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+          listItem?: 'bullet' | 'number'
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        features?: Array<{
+          text: string
+          _key: string
+        }>
+        priceLabel?: string
+        priceValue?: string
+        priceDetails?: string
+      }
+    | {
+        _key: string
+        _type: 'servicesSection'
+        heading: string
+        services: Array<{
+          _key: string
+          title: string
+          image: {
+            asset: SanityImageAssetReference | null
+            media?: unknown // Unable to locate the referenced type "image.media" in schema
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          }
+          showMoreButton: {
+            text?: string
+            link: {
+              _type: 'link'
+              linkType?: 'href' | 'page' | 'post'
+              href?: string
+              page: string | null
+              post: string | null
+              openInNewTab?: boolean
+            } | null
+          } | null
+          advantages: string | null
+          description: Array<{
+            children?: Array<{
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }>
+            style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+            listItem?: 'bullet' | 'number'
+            markDefs: Array<{
+              href?: string
+              _type: 'link'
+              _key: string
+              page: null
+              post: null
+            }> | null
+            level?: number
+            _type: 'block'
+            _key: string
+          }>
+        }>
+        cleaningExamples: {
+          heading: string | null
+          examples: string | null
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'videoSection'
+        videoUrl: string | null
+        videoFile: {
+          asset: {
+            url: string | null
+          } | null
+        } | null
+        title: string | null
+        subtitle: string | null
+        description: string | null
+        buttonText: string | null
+        buttonLink: string | null
+        overlayContent: boolean | null
+        autoplay: boolean | null
+        muted: boolean | null
+        loop: boolean | null
+        controls: boolean | null
       }
   > | null
 } | null
@@ -731,12 +1287,7 @@ export type AllPostsQueryResult = Array<{
   slug: string
   excerpt: string | null
   coverImage: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
+    asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
@@ -748,12 +1299,7 @@ export type AllPostsQueryResult = Array<{
     firstName: string
     lastName: string
     picture: {
-      asset?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-      }
+      asset?: SanityImageAssetReference
       media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
@@ -773,12 +1319,7 @@ export type MorePostsQueryResult = Array<{
   slug: string
   excerpt: string | null
   coverImage: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
+    asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
@@ -790,12 +1331,7 @@ export type MorePostsQueryResult = Array<{
     firstName: string
     lastName: string
     picture: {
-      asset?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-      }
+      asset?: SanityImageAssetReference
       media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
@@ -837,12 +1373,7 @@ export type PostQueryResult = {
   slug: string
   excerpt: string | null
   coverImage: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
+    asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
@@ -854,12 +1385,7 @@ export type PostQueryResult = {
     firstName: string
     lastName: string
     picture: {
-      asset?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-      }
+      asset?: SanityImageAssetReference
       media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
@@ -888,8 +1414,8 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "settings"][0]': SettingsQueryResult
-    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "heroCarousel" => {\n        slides[]{\n          _key,\n          title,\n          subtitle,\n          description,\n          buttonText,\n          buttonLink,\n          image{\n            ...,\n            asset\n          }\n        }\n      },\n      _type == "servicesSection" => {\n        heading,\n        services[]{\n          _key,\n          title,\n          image{\n            ...,\n            asset\n          },\n          showMoreButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          },\n          advantages,\n          description[]{\n            ...,\n            markDefs[]{\n              ...,\n              \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n            }\n          }\n        },\n        cleaningExamples{\n          heading,\n          examples\n        }\n      },\n      _type == "pricingSection" => {\n        heading,\n        pricingCards[]{\n          _key,\n          serviceName,\n          price,\n          priceUnit,\n          priceColor\n        }\n      },\n      _type == "galleryCarousel" => {\n        heading,\n        subheading,\n        galleryItems[]{\n          _key,\n          title,\n          description,\n          image{\n            ...,\n            asset\n          }\n        }\n      },\n      _type == "contactSection" => {\n        heading,\n        subheading,\n        description,\n        contactInfo{\n          address,\n          email,\n          phone\n        },\n        showForm\n      },\n    },\n  }\n': GetPageQueryResult
-    '\n  *[_type == \'page\' && slug.current == \'/\'][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "heroCarousel" => {\n        slides[]{\n          _key,\n          title,\n          subtitle,\n          description,\n          buttonText,\n          buttonLink,\n          image{\n            ...,\n            asset\n          }\n        }\n      },\n      _type == "servicesSection" => {\n        heading,\n        services[]{\n          _key,\n          title,\n          image{\n            ...,\n            asset\n          },\n          showMoreButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          },\n          advantages,\n          description[]{\n            ...,\n            markDefs[]{\n              ...,\n              \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n            }\n          }\n        },\n        cleaningExamples{\n          heading,\n          examples\n        }\n      },\n      _type == "pricingSection" => {\n        heading,\n        pricingCards[]{\n          _key,\n          serviceName,\n          price,\n          priceUnit,\n          priceColor\n        }\n      },\n      _type == "galleryCarousel" => {\n        heading,\n        subheading,\n        galleryItems[]{\n          _key,\n          title,\n          description,\n          image{\n            ...,\n            asset\n          }\n        }\n      },\n      _type == "contactSection" => {\n        heading,\n        subheading,\n        description,\n        contactInfo{\n          address,\n          email,\n          phone\n        },\n        showForm\n      },\n    },\n  }\n': GetHomepageQueryResult
+    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "heroCarousel" => {\n        slides[]{\n          _key,\n          title,\n          subtitle,\n          description,\n          buttonText,\n          buttonLink,\n          image{\n            ...,\n            asset\n          }\n        }\n      },\n      _type == "videoSection" => {\n        videoUrl,\n        videoFile{\n          asset->{\n            url\n          }\n        },\n        title,\n        subtitle,\n        description,\n        buttonText,\n        buttonLink,\n        overlayContent,\n        autoplay,\n        muted,\n        loop,\n        controls\n      },\n      _type == "servicesSection" => {\n        heading,\n        services[]{\n          _key,\n          title,\n          image{\n            ...,\n            asset\n          },\n          showMoreButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          },\n          advantages,\n          description[]{\n            ...,\n            markDefs[]{\n              ...,\n              \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n            }\n          }\n        },\n        cleaningExamples{\n          heading,\n          examples\n        }\n      },\n      _type == "pricingSection" => {\n        heading,\n        pricingCards[]{\n          _key,\n          serviceName,\n          price,\n          priceUnit,\n          priceColor\n        }\n      },\n      _type == "galleryCarousel" => {\n        heading,\n        subheading,\n        galleryItems[]{\n          _key,\n          title,\n          description,\n          image{\n            ...,\n            asset\n          }\n        }\n      },\n      _type == "contactSection" => {\n        heading,\n        subheading,\n        description,\n        contactInfo{\n          address,\n          email,\n          phone\n        },\n        showForm\n      },\n    },\n  }\n': GetPageQueryResult
+    '\n  *[_type == \'page\' && slug.current == \'/\'][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "heroCarousel" => {\n        slides[]{\n          _key,\n          title,\n          subtitle,\n          description,\n          buttonText,\n          buttonLink,\n          image{\n            ...,\n            asset\n          }\n        }\n      },\n      _type == "videoSection" => {\n        videoUrl,\n        videoFile{\n          asset->{\n            url\n          }\n        },\n        title,\n        subtitle,\n        description,\n        buttonText,\n        buttonLink,\n        overlayContent,\n        autoplay,\n        muted,\n        loop,\n        controls\n      },\n      _type == "servicesSection" => {\n        heading,\n        services[]{\n          _key,\n          title,\n          image{\n            ...,\n            asset\n          },\n          showMoreButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          },\n          advantages,\n          description[]{\n            ...,\n            markDefs[]{\n              ...,\n              \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n            }\n          }\n        },\n        cleaningExamples{\n          heading,\n          examples\n        }\n      },\n      _type == "pricingSection" => {\n        heading,\n        pricingCards[]{\n          _key,\n          serviceName,\n          price,\n          priceUnit,\n          priceColor\n        }\n      },\n      _type == "galleryCarousel" => {\n        heading,\n        subheading,\n        galleryItems[]{\n          _key,\n          title,\n          description,\n          image{\n            ...,\n            asset\n          }\n        }\n      },\n      _type == "contactSection" => {\n        heading,\n        subheading,\n        description,\n        contactInfo{\n          address,\n          email,\n          phone\n        },\n        showForm\n      },\n    },\n  }\n': GetHomepageQueryResult
     '\n  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
     '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult
     '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': MorePostsQueryResult

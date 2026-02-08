@@ -56,7 +56,7 @@ export default function Header() {
                   Leistungen
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="w-[200px] p-2 bg-gray-900 border border-gray-800">
+                  <ul className="w-50 p-2 bg-gray-900 border border-gray-800">
                     <li>
                       <NavigationMenuLink
                         className="block px-4 py-3 text-white hover:bg-gray-800 hover:text-primary transition-colors rounded-md"

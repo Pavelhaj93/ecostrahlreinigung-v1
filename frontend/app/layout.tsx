@@ -1,12 +1,11 @@
 import './globals.css'
-
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
 import Header from '@/app/components/Header'
 import {industry} from './fonts'
 import FooterSection from './components/FooterSection'
 import {SanityLive} from '@/sanity/lib/live'
-import {VisualEditing} from 'next-sanity'
+import {VisualEditing} from 'next-sanity/visual-editing'
 import DraftModeToast from './components/DraftModeToast'
 import {draftMode} from 'next/headers'
 import {Toaster} from 'sonner'

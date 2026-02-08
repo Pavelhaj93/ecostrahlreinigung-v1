@@ -60,7 +60,7 @@ export default function ServicesSection({block}: ServicesSectionProps = {}) {
                 {/* Image */}
                 {service.image && (
                   <div className="w-full lg:w-1/2">
-                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-gray-800">
+                    <div className="relative aspect-4/3 rounded-lg overflow-hidden border border-gray-800">
                       <Image
                         src={urlForImage(service.image)?.width(800).height(600).url() || ''}
                         alt={service.title}
@@ -101,7 +101,7 @@ export default function ServicesSection({block}: ServicesSectionProps = {}) {
         </div>
 
         {/* What We Clean */}
-        <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-8 rounded-lg border border-gray-700">
+        <div className="bg-linear-to-r from-gray-900 to-gray-800 p-8 rounded-lg border border-gray-700">
           <h3 className="text-2xl font-bold text-center mb-6 text-white">
             {cleaningExamples.heading}
           </h3>

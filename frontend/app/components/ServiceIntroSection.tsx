@@ -26,7 +26,7 @@ export default function ServiceIntroSection({block}: ServiceIntroSectionProps = 
           {/* Image */}
           {block?.image && (
             <div className="order-2 lg:order-1 lg:sticky lg:top-24">
-              <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-gray-800 shadow-2xl">
+              <div className="relative aspect-4/3 rounded-lg overflow-hidden border border-gray-800 shadow-2xl">
                 <Image
                   src={urlForImage(block.image)?.width(800).height(600).url() || ''}
                   alt={block.heading || 'Service'}
@@ -62,7 +62,7 @@ export default function ServiceIntroSection({block}: ServiceIntroSectionProps = 
                   {block.features.map((feature) => (
                     <li key={feature._key} className="flex items-start gap-3">
                       <svg
-                        className="w-6 h-6 text-primary flex-shrink-0 mt-0.5"
+                        className="w-6 h-6 text-primary shrink-0 mt-0.5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -82,7 +82,7 @@ export default function ServiceIntroSection({block}: ServiceIntroSectionProps = 
 
               {/* Pricing Card */}
               {(block?.priceLabel || block?.priceValue) && (
-                <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-lg border border-gray-700 mt-8">
+                <div className="bg-linear-to-br from-gray-900 to-gray-800 p-6 rounded-lg border border-gray-700 mt-8">
                   <div className="flex items-baseline gap-3">
                     {block.priceLabel && (
                       <span className="text-gray-400 text-sm uppercase tracking-wide">

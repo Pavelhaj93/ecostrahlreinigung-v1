@@ -9,6 +9,7 @@ import GalleryCarousel from '@/app/components/GalleryCarousel'
 import ContactSection from '@/app/components/ContactSection'
 import ServiceIntroSection from '@/app/components/ServiceIntroSection'
 import MasonryGallerySection from '@/app/components/MasonryGallerySection'
+import VideoSection from '@/app/components/VideoSection'
 import {dataAttr} from '@/sanity/lib/utils'
 
 type BlocksType = {
@@ -37,12 +38,14 @@ const Blocks: BlocksType = {
   contactSection: ContactSection,
   serviceIntroSection: ServiceIntroSection,
   masonryGallerySection: MasonryGallerySection,
+  videoSection: VideoSection,
 }
 
 /**
  * Used by the <PageBuilder>, this component renders a the component that matches the block type.
  */
 export default function BlockRenderer({block, index, pageId, pageType}: BlockProps) {
+  console.log('ttt block:', block)
   // Block does exist
   if (typeof Blocks[block._type] !== 'undefined') {
     return (

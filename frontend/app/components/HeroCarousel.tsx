@@ -60,7 +60,7 @@ export default function HeroCarousel({block}: HeroCarouselProps = {}) {
 
   return (
     <section id="home" className="relative w-full">
-      <div className="relative h-[600px] w-full overflow-hidden">
+      <div className="relative h-150 w-full overflow-hidden">
         {/* Background Image with Gradient Fallback and Transition */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
@@ -72,7 +72,7 @@ export default function HeroCarousel({block}: HeroCarouselProps = {}) {
           }}
         >
           {/* Dark Overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-black/30"></div>
         </div>
         {/* Content */}
         <div className="relative z-10 flex h-full items-center">

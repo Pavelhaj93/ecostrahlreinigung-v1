@@ -63,6 +63,24 @@ export const getPageQuery = defineQuery(`
           }
         }
       },
+      _type == "videoSection" => {
+        videoUrl,
+        videoFile{
+          asset->{
+            url
+          }
+        },
+        title,
+        subtitle,
+        description,
+        buttonText,
+        buttonLink,
+        overlayContent,
+        autoplay,
+        muted,
+        loop,
+        controls
+      },
       _type == "servicesSection" => {
         heading,
         services[]{
@@ -161,6 +179,24 @@ export const getHomepageQuery = defineQuery(`
             asset
           }
         }
+      },
+      _type == "videoSection" => {
+        videoUrl,
+        videoFile{
+          asset->{
+            url
+          }
+        },
+        title,
+        subtitle,
+        description,
+        buttonText,
+        buttonLink,
+        overlayContent,
+        autoplay,
+        muted,
+        loop,
+        controls
       },
       _type == "servicesSection" => {
         heading,

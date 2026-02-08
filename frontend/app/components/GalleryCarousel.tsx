@@ -1,6 +1,6 @@
 'use client'
 
-import {useEffect, useCallback, useState} from 'react'
+import {useEffect, useState} from 'react'
 import Image from 'next/image'
 import {
   Carousel,
@@ -125,7 +125,7 @@ export default function GalleryCarousel({block}: GalleryCarouselProps = {}) {
                             <span className="text-gray-500">No image</span>
                           </div>
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-linear-to-t from-gray-950 via-gray-950/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 p-6">
                         <h3 className="text-xl font-bold text-white mb-2 line-clamp-2">

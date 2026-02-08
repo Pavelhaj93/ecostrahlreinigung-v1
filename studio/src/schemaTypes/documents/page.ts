@@ -54,6 +54,7 @@ export const page = defineType({
         {type: 'galleryCarousel'},
         {type: 'masonryGallerySection'},
         {type: 'contactSection'},
+        {type: 'videoSection'},
       ],
       options: {
         insertMenu: {

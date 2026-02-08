@@ -1,6 +1,6 @@
 export default function HeroSection() {
   return (
-    <section id="home" className="py-20 bg-gradient-to-r from-blue-900 to-primary text-white">
+    <section id="home" className="py-20 bg-linear-to-r from-blue-900 to-primary text-white">
       <div className="container mx-auto px-6 text-center">
         <h1 className="text-5xl font-bold mb-6">Ecostrahlreinigung</h1>
         <h2 className="text-2xl mb-4">Trockeneisreinigung · Laserreinigung · Strahltechnik</h2>

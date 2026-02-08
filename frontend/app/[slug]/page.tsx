@@ -1,6 +1,5 @@
 import type {Metadata} from 'next'
 import Head from 'next/head'
-
 import PageBuilderPage from '@/app/components/PageBuilder'
 import {sanityFetch} from '@/sanity/lib/live'
 import {getPageQuery, pagesSlugs} from '@/sanity/lib/queries'
@@ -62,7 +61,7 @@ export default async function Page(props: Props) {
         <title>{page.heading}</title>
       </Head>
       {/* Hero Heading Section */}
-      <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 py-20 lg:py-28 border-b border-gray-800">
+      <div className="bg-linear-to-r from-gray-900 via-black to-gray-900 py-20 lg:py-28 border-b border-gray-800">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl mb-6">
@@ -75,9 +74,9 @@ export default async function Page(props: Props) {
             )}
             {/* Decorative line */}
             <div className="mt-8 flex items-center justify-center gap-4">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary"></div>
+              <div className="h-px w-16 bg-linear-to-r from-transparent to-primary"></div>
               <div className="h-2 w-2 bg-primary rounded-full"></div>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary"></div>
+              <div className="h-px w-16 bg-linear-to-l from-transparent to-primary"></div>
             </div>
           </div>
         </div>

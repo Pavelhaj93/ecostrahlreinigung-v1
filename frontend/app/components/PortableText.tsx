@@ -9,7 +9,6 @@
  */
 
 import {PortableText, type PortableTextComponents, type PortableTextBlock} from 'next-sanity'
-
 import ResolvedLink from '@/app/components/ResolvedLink'
 
 export default function CustomPortableText({
